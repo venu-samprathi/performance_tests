@@ -1,0 +1,15 @@
+<launch>
+  <!-- The talker node will publish a custom message. -->
+  <node pkg="performance_tests" type="talker" name="talker">
+    <param name="message" value="hello"/>
+    <param name="rate" value="100"/>
+    <remap from="topicsome" to="chatter"/>
+  </node>
+
+  <!-- The listener node subscribes to the custom message that talker is publishing. -->
+  <node pkg="performance_tests" type="py_listen.py" name="py_listen">
+    <remap from="topicsome" to="chatter"/>
+  </node>
+
+  <include file="$(find performance_tests)/launch/tools.launch"/>
+</launch>
